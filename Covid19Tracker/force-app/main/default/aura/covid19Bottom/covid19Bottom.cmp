@@ -1,0 +1,30 @@
+<aura:component>
+    <aura:registerEvent name="paginationEvent" type="c:PaginationEvent"/>
+    <aura:attribute name="totalRecords" type="integer"/>
+    <aura:attribute name="totalPages" type="integer"/>
+    <aura:attribute name="pageNumber" type="integer"/>
+    <aura:attribute name="pageSize" type="integer"/>
+   
+    <div class="slds-grid">
+        <div class="slds-col slds-size_5-of-12">
+            <lightning:buttonGroup class="slds-var-m-around_large">
+                <lightning:button title="First" label="First" aura:id="first" variant="brand" name="first" onclick="{!c.handlePagination}" 
+                    disabled="{!v.pageNumber==1}"/>
+                <lightning:button title="Next" label="Next" variant="brand" aura:id="next" name="next" onclick="{!c.handlePagination}" 
+                    disabled="{!v.pageNumber==v.totalPages}"/>
+            </lightning:buttonGroup>
+        </div>
+        <div class="slds-col slds-size_2-of-12 slds-float_right">
+            <span class="pageIndicator"><b>{!v.pageNumber} of {!v.totalPages}</b></span>
+            
+        </div>
+        <div class="slds-col slds-size_5-of-12">
+            <lightning:buttonGroup class="slds-var-m-around_large slds-float_right">
+                <lightning:button title="Previous" label="Previous" variant="brand" name="previous" aura:id="previous" onclick="{!c.handlePagination}" 
+                    disabled="{!v.pageNumber==1}"/>
+                <lightning:button title="Last" label="Last" variant="brand" aura:id="last" name="last" onclick="{!c.handlePagination}" 
+                    disabled="{!v.pageNumber==v.totalPages}"/>
+            </lightning:buttonGroup>
+        </div>
+    </div>
+</aura:component>	

@@ -1,0 +1,19 @@
+<aura:component>
+    <aura:registerEvent name="searchEvent" type="c:SearchCountryEvent"/>
+    <aura:attribute name="country" type="string"/>
+    <div class="slds-page-header" id="head1">
+        <div class="slds-grid" >
+            <div class="slds-col slds-size_11-of-12">
+                <span class="header">Covid-19 Tracker</span>
+            </div>
+            <div class="slds-col slds-size_1-of-12">
+                <lightning:buttonIcon iconName="utility:refresh" alternativeText="Refresh Icon" onclick="{!c.refresh}" title="Setting" variant="brand"/>
+            </div>
+        </div>
+        <div class="slds-grid">
+                <lightning:input type="text" name="searchKey"  aura:id="searchKey" onkeyup="{!c.searchKeyChange}" placeholder="Search Country..."  
+                style="padding-left:auto;padding-right:auto;width:100%;padding-top:160px;opacity:0.5;"
+                value="{!v.country}"/>          
+        </div>
+    </div>
+</aura:component>	

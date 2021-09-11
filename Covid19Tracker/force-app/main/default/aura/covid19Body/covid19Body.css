@@ -1,0 +1,10 @@
+.THIS.dt {
+    padding: 1%;
+    font-size: 18px;
+    height: 100%;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.THIS.dt lightning-primitive-header-actions{
+    display: none;
+}
+

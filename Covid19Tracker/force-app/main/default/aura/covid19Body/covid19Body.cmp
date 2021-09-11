@@ -1,0 +1,60 @@
+<aura:component controller="Covid19Controller">
+    <aura:attribute name="totalConfirmed" type="string"/>
+    <aura:attribute name="newConfirmed" type="string"/>
+    <aura:attribute name="totalRecovered" type="string"/>
+    <aura:attribute name="totalDeaths" type="string"/>
+
+    <aura:attribute name="columns" type="list"/>
+    <aura:attribute name="data" type="object"/>
+
+    <!--aura handler with waiting and donewaiting events-->
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+
+    <aura:attribute name="spinner" type="boolean" default="FALSE"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="searchEvent" event="c:SearchCountryEvent" action="{!c.searchByCountry}"/>
+    <aura:handler name="paginationEvent" event="c:PaginationEvent" action="{!c.handlePagination}"/>
+
+    <!--Attributes for pagination-->
+    <aura:attribute name="pageNumber" type="integer" default="1"/>
+    <aura:attribute name="pageSize" type="integer" default="20"/>
+    <aura:attribute name="totalRecords" type="integer" default="0"/>
+    <aura:attribute name="totalPages" type="integer"/>
+
+   <c:Covid19Header/>
+     <aura:if isTrue="{!v.spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                <span class="slds-assistive-text">Loading...</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    <div style="padding: 10px;">
+        <lightning:tabset>
+            <lightning:tab label="Live Data">
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_3-of-12" style="background-color: orange; padding:10px;">
+                        <span style="color: white;font-size:18px;">TOTAL CONFIRMED: <b style="font-size: 17px;">{!v.totalConfirmed}</b></span>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12" style="background-color:blue; padding:10px;">
+                         <span style="color: white;font-size:18px;">NEW CONFIRMED: <b style="font-size: 17px;">{!v.newConfirmed}</b></span>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12" style="background-color: orangered; padding:10px;">
+                         <span style="color: white;font-size:18px;">TOTAL RECOVERED: <b style="font-size: 17px;">{!v.totalRecovered}</b></span>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12" style="background-color: crimson; padding:10px;">
+                         <span style="color: white;font-size:18px;">TOTAL DEATHS: <b style="font-size: 17px;">{!v.totalDeaths}</b></span>
+                    </div>
+                </div>
+            </lightning:tab>
+    </lightning:tabset>
+    </div>
+    <div class="dt">
+        <lightning:datatable columns="{!v.columns}" keyField="Id" hideCheckboxColumn="true" data="{!v.data}"/>
+    </div>
+    <c:Covid19Bottom pageNumber="{!v.pageNumber}" pageSize="{!v.pageSize}" totalPages="{!v.totalPages}" totalRecords="{!v.totalRecords}"/>
+</aura:component>	
