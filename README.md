@@ -1,5 +1,5 @@
 # covid19-tracker
-Covid19 live data tracking using live json api
+Covid19 live data tracking using Apex REST Api
 
 ## used API : https://api.covid19api.com/summary
 
